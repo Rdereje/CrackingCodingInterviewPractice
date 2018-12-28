@@ -25,10 +25,10 @@ public class One_b
 		unsort.sort(sorted);
 		for(int i = 0; i < sorted.length-1;i++)
 		{
-			System.out.print(sorted[i]);
 			if(sorted[i] == sorted[i+1])
 				unique = false;
 		}
+		
 		return unique;
 	}
 	void sort(char[] arr)
@@ -53,39 +53,38 @@ public class One_b
 	}
 	void merge(char arr[],int left, int mid, int right)
 	{
-		int a = left;
-		int b = mid+1;
-		char[] temp = new char[right-left+1];
-		for(int i = left; i < right; i++)
+		int l = mid - left + 1;
+		int r = right - mid;
+		
+		char[] lSide = new char[l];
+		char[] rSide = new char[r];
+		
+		for(int i = 0; i < l; ++i)
 		{
-			if(a == mid+1)
+			lSide[i] = arr[left+i];
+		}
+		for(int j = 0; j < r; ++j)
+		{
+			rSide[j] = arr[mid+1+j];
+		}
+		
+		int a = 0, b = 0, k = left;
+	
+		while(a < l && b < r)
+		{
+			if(lSide[a] <= rSide[b])
 			{
-				temp[i] = arr[b];
-				b++;
-			}
-			else if(b == right)
-			{
-				temp[i] = arr[a];
-				a++;
-			}
-			else if(arr[a] < arr[b])
-			{
-				temp[i] = arr[a];
+				arr[k] = lSide[a];
 				a++;
 			}
 			else
 			{
-				temp[i] = arr[b];
+				arr[k] = rSide[b];
 				b++;
 			}
-						
+			k++;
 		}
-		int j = left;
-		for(int i = 0; i < temp.length;i++)
-		{
-			arr[j] = temp[i];
-			j++;
-		}
+		
 	}
 	
 	
